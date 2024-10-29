@@ -20,7 +20,7 @@ It is learn from countUp.js;
 ### How to use?
 
 ```bash
-npm install vue-count-to
+npm install vue-count2
 ```
 
 ### Example
@@ -32,7 +32,7 @@ npm install vue-count-to
 </template>
 
 <script>
-  import countTo from 'vue-count-to';
+  import countTo from 'vue-count2';
 
   export default {
     components: { countTo },
