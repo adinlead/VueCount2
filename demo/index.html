@@ -41,7 +41,7 @@
         <div class="example-item">
           <h3> custom example</h3>
           <count-to ref='example3' class='example3' :start-val='_startVal' :end-val='_endVal' :duration='_duration' :decimals='_decimals'
-            :separator='_separator' :prefix='_prefix' :suffix='_suffix' :autoplay=false>
+            :separator='_separator' :size='_size' :prefix='_prefix' :suffix='_suffix' :autoplay=false>
           </count-to>
           <div>
             <label class="label" for="startValInput">startVal:  <input type="number" v-model.number='setStartVal' name='startValInput' /></label>
@@ -52,101 +52,106 @@
             <br/>
             <label class="label" for="decimalsInput">decimals:  <input type="number" v-model.number='setDecimals' name='decimalsInput' /></label>
             <label class="label" for="separatorInput">separator:  <input v-model='setSeparator' name='separatorInput' /></label>
+            <label class="label" for="sizeInput">size:  <input v-model='setSize' name='sizeInput' /></label>
             <label class="label" for="prefixInput">prefix: <input v-model='setPrefix' name='prefixInput' /></label>
             <label class="label" for="suffixInput">suffix: <input v-model='setSuffix' name='suffixInput' /></label>
           </div>
           <code>&lt;count-to  :start-val=&#x27;{{_startVal}}&#x27; :end-val=&#x27;{{_endVal}}&#x27; :duration=&#x27;{{_duration}}&#x27; :decimals=&#x27;{{_decimals}}&#x27;
-            :separator=&#x27;{{_separator}}&#x27; :prefix=&#x27;{{_prefix}}&#x27; :suffix=&#x27;{{_suffix}}&#x27; :autoplay=false&gt;</code>
+            :separator=&#x27;{{_separator}}&#x27; :size=&#x27;{{_size}}&#x27; :prefix=&#x27;{{_prefix}}&#x27; :suffix=&#x27;{{_suffix}}&#x27; :autoplay=false&gt;</code>
         </div>
       </div>
     </template>
   </div>
   <script>
-    var Main = {
-      name: 'test',
-      data() {
-        return {
-          setStartVal: 0,
-          setEndVal: 2017,
-          setDuration: 4000,
-          setDecimals: 0,
-          setSeparator: ',',
-          setSuffix: ' rmb',
-          setPrefix: '¥ ',
-          startVal1:0,
-          endVal1:2017
-        }
-      },
-      computed: {
-        _startVal() {
-          if (this.setStartVal) {
-            return this.setStartVal
-          } else {
-            return 0
-          }
-        },
-        _endVal() {
-          if (this.setEndVal) {
-            return this.setEndVal
-          } else {
-            return 0
-          }
-        },
-        _duration() {
-          if (this.setDuration) {
-            return this.setDuration
-          } else {
-            return 100
-          }
-        },
-        _decimals() {
-          if (this.setDecimals) {
-            if (this.setDecimals < 0 || this.setDecimals > 20) {
-              alert('digits argument must be between 0 and 20')
-              return 0
-            }
-            return this.setDecimals
-          } else {
-            return 0
-          }
-        },
-        _separator() {
-          return this.setSeparator
-        },
-        _suffix() {
-          return this.setSuffix
-        },
-        _prefix() {
-          return this.setPrefix
-        },
-      },
-      methods: {
-        changeExampleEndVal(){
-          this.endVal1=this.endVal1+1000
-        },
-        incrementalUpdate(){
-          this.startVal1=this.endVal1
-          this.endVal1=this.endVal1+1000
-        },
-        callback() {
-          console.log('callback')
-        },
-        start1() {
-          this.$refs.example1.start();
-        },
-        start2() {
-          this.$refs.example2.start();
-        },
-        start3() {
-          this.$refs.example3.start();
-        },
-        pauseResume() {
-          this.$refs.example3.pauseResume();
-        }
+const Main = {
+  name: 'test',
+  data() {
+    return {
+      setStartVal: 0,
+      setEndVal: 2017,
+      setDuration: 4000,
+      setDecimals: 0,
+      setSeparator: ',',
+      setSize: 3,
+      setSuffix: ' rmb',
+      setPrefix: '¥ ',
+      startVal1: 0,
+      endVal1: 2017
+    }
+  },
+  computed: {
+    _startVal() {
+      if (this.setStartVal) {
+        return this.setStartVal
+      } else {
+        return 0
       }
-    };
-    var Ctor = Vue.extend(Main)
-    new Ctor().$mount('#app')
+    },
+    _endVal() {
+      if (this.setEndVal) {
+        return this.setEndVal
+      } else {
+        return 0
+      }
+    },
+    _duration() {
+      if (this.setDuration) {
+        return this.setDuration
+      } else {
+        return 100
+      }
+    },
+    _decimals() {
+      if (this.setDecimals) {
+        if (this.setDecimals < 0 || this.setDecimals > 20) {
+          alert('digits argument must be between 0 and 20')
+          return 0
+        }
+        return this.setDecimals
+      } else {
+        return 0
+      }
+    },
+    _separator() {
+      return this.setSeparator
+    },
+    _size() {
+      return this.setSize
+    },
+    _suffix() {
+      return this.setSuffix
+    },
+    _prefix() {
+      return this.setPrefix
+    }
+  },
+  methods: {
+    changeExampleEndVal() {
+      this.endVal1 = this.endVal1 + 1000
+    },
+    incrementalUpdate() {
+      this.startVal1 = this.endVal1
+      this.endVal1 = this.endVal1 + 1000
+    },
+    callback() {
+      console.log('callback')
+    },
+    start1() {
+      this.$refs.example1.start();
+    },
+    start2() {
+      this.$refs.example2.start();
+    },
+    start3() {
+      this.$refs.example3.start();
+    },
+    pauseResume() {
+      this.$refs.example3.pauseResume();
+    }
+  }
+};
+const Ctor = Vue.extend(Main)
+new Ctor().$mount('#app')
   </script>
 </body>
 

@@ -1,10 +1,11 @@
 <template>
     <span>
-      {{displayValue}}
+      {{ displayValue }}
     </span>
 </template>
 <script>
-import { requestAnimationFrame, cancelAnimationFrame } from './requestAnimationFrame.js'
+import { cancelAnimationFrame, requestAnimationFrame } from './requestAnimationFrame.js'
+
 export default {
   props: {
     startVal: {
@@ -44,6 +45,11 @@ export default {
       type: String,
       required: false,
       default: ','
+    },
+    size: {
+      type: Number,
+      required: false,
+      default: 3
     },
     prefix: {
       type: String,
@@ -175,8 +181,12 @@ export default {
       const x = num.split('.');
       let x1 = x[0];
       const x2 = x.length > 1 ? this.decimal + x[1] : '';
-      const rgx = /(\d+)(\d{3})/;
+      console.log(`(\\d+)(\\d{${this.size}})`);
+      const rgx = new RegExp(`(\\d+)(\\d{${this.size}})`);
       if (this.separator && !this.isNumber(this.separator)) {
+        console.log(rgx)
+        console.log('this.separator && !this.isNumber(this.separator)')
+        console.log('rgx.test(x1) >>> ', rgx.test(x1))
         while (rgx.test(x1)) {
           x1 = x1.replace(rgx, '$1' + this.separator + '$2');
         }
